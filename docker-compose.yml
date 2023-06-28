@@ -1,0 +1,24 @@
+version: '3'
+services:
+  app:
+    image: gihan4/projectapp:1.0
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: db_prices
+      MYSQL_USER: gihanroey
+      MYSQL_PASSWORD: roro123
+      MYSQL_ROOT_PASSWORD: roro123
+    volumes:
+      - db-data:/var/lib/mysql
+volumes:
+  db-data:
