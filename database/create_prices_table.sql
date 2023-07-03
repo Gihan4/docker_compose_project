@@ -1,4 +1,6 @@
 -- create_prices_table.sql
+CREATE DATABASE IF NOT EXIST db_prices;
+USE db_prices;
 
 CREATE TABLE prices (
   id INT AUTO_INCREMENT PRIMARY KEY,
