@@ -33,12 +33,18 @@ def eth():
 
     return render_template("eth.html", eth_price=eth_price)
 
+def format_with_commas(value):
+    return "{:,.2f}".format(value)
+
 @app.route("/btc")
 def btc():
     btc_response = requests.get("https://api.coindesk.com/v1/bpi/currentprice.json")
 
     if btc_response.status_code == 200:
         bitcoin_price = btc_response.json()["bpi"]["USD"]["rate"]
+
+       # Remove commas from the Bitcoin price and convert it to a float
+        bitcoin_price = float(bitcoin_price.replace(',', ''))
 
         # Insert the Bitcoin price into the prices table
         query = "INSERT INTO prices (cryptocurrency, price) VALUES (%s, %s)"
@@ -64,8 +70,19 @@ def get_prices():
             'timestamp': price[3]
         })
 
-    # Return the price data as JSON
-    return jsonify(price_data)
+    # Render the prices.html template with the price data
+    return render_template("prices.html", prices=price_data)
+
+
+@app.route("/clear_table")
+def clear_table():
+    query = "DELETE FROM prices"
+    mycursor.execute(query)
+    mydb.commit()
+
+    return "Table cleared successfully"
+
+
 
 if __name__ == '__main__':
     app.run()
