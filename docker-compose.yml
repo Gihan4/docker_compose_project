@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    image: gihan4/projectapp:1.0
+    image: gihan4/appimage:${BUILD_NUMBER}
     build:
       context: .
       dockerfile: app/Dockerfile
