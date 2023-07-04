@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    image: gihan4/appimage:${BUILD_NUMBER}
+    image: gihan4/appimage:latest
     ports:
       - 5000:5000
     depends_on:
