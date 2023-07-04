@@ -2,9 +2,6 @@ version: '3'
 services:
   app:
     image: gihan4/appimage:${BUILD_NUMBER}
-    build:
-      context: .
-      dockerfile: app/Dockerfile
     ports:
       - 5000:5000
     depends_on:
