@@ -1,4 +1,4 @@
-Flask
+Flask==2.0.2
 #Flask-MySQL
 #flask-mysqldb
 requests
